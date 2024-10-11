@@ -10,9 +10,13 @@ class Group < ApplicationRecord
 
     enum currency: {
         rupee: "Rupee",
-        dollor: "Dollor",
-        euro: "Euro"
+        yen: "Yen",
+        euro: "Euro",
+        dollar: "Dollar"
     }
+
+    has_many :group_users
+    has_many :users, through: :group_users
     
     validates :group_name, presence: true, uniqueness: true
     validates :currency, presence: true

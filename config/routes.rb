@@ -11,7 +11,11 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :users, only: [:create]
-      resources :groups, only: [:create]
+      resources :groups do
+        member do
+          post 'add_user'  # This creates a POST route for adding a user to a group
+        end
+      end
     end
   end
 end
