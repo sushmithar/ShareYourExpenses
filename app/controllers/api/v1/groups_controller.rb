@@ -1,5 +1,5 @@
 class Api::V1::GroupsController < ApplicationController
-    before_action :set_group, only: [:add_user, :enable_simplify_debt]
+    before_action :set_group, only: [:add_user, :enable_simplify_debt, :disable_simplify_debt]
     def create
         @group = Group.new(groups_params)
         if @group.save
@@ -25,13 +25,19 @@ class Api::V1::GroupsController < ApplicationController
     end
 
     def enable_simplify_debt
-        unless @group.IsSimplifyDebtEnabled
-            if @group.update(IsSimplifyDebtEnabled: true)
-                render json: { message: "SimplifyDebt is enabled for this group" }, status: :ok
-            else
-                render json: { error: "Unable enable the SimplifyDebt"}, status: :unprocessable_entity
-            end
-        end  
+        if @group.update(IsSimplifyDebtEnabled: true)
+            render json: { message: "SimplifyDebt is enabled for this group" }, status: :ok
+        else
+            render json: { error: "Unable enable the SimplifyDebt"}, status: :unprocessable_entity
+        end 
+    end
+
+    def disable_simplify_debt
+        if @group.update(IsSimplifyDebtEnabled: false)
+            render json: { message: "SimplifyDebt is disable for this group" }, status: :ok
+        else
+            render json: { error: "Unable disable the SimplifyDebt"}, status: :unprocessable_entity
+        end 
     end
  
  
