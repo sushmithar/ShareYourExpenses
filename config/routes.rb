@@ -15,6 +15,7 @@ Rails.application.routes.draw do
         member do
           post 'add_user'
           post 'enable_simplify_debt'
+          post 'disable_simplify_debt'
         end
       end
     end
