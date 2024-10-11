@@ -13,7 +13,8 @@ Rails.application.routes.draw do
       resources :users, only: [:create]
       resources :groups do
         member do
-          post 'add_user'  # This creates a POST route for adding a user to a group
+          post 'add_user'
+          post 'enable_simplify_debt'
         end
       end
     end

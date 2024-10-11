@@ -1,5 +1,5 @@
 class Api::V1::GroupsController < ApplicationController
-    before_action :set_group, only: [:add_user]
+    before_action :set_group, only: [:add_user, :enable_simplify_debt]
     def create
         @group = Group.new(groups_params)
         if @group.save
@@ -22,6 +22,16 @@ class Api::V1::GroupsController < ApplicationController
         rescue ActiveRecord::RecordNotFound
             render json: { error: "Group or user not found" }, status: :not_found
         end
+    end
+
+    def enable_simplify_debt
+        unless @group.IsSimplifyDebtEnabled
+            if @group.update(IsSimplifyDebtEnabled: true)
+                render json: { message: "SimplifyDebt is enabled for this group" }, status: :ok
+            else
+                render json: { error: "Unable enable the SimplifyDebt"}, status: :unprocessable_entity
+            end
+        end  
     end
  
  
