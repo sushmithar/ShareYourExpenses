@@ -1,5 +1,6 @@
 class Api::V1::GroupsController < ApplicationController
-    before_action :set_group, only: [:add_user, :enable_simplify_debt, :disable_simplify_debt]
+    before_action :set_group, only: [:add_user, :enable_simplify_debt,
+        :disable_simplify_debt, :fetch_bills_of_group]
     def create
         @group = Group.new(groups_params)
         if @group.save
@@ -38,6 +39,15 @@ class Api::V1::GroupsController < ApplicationController
         else
             render json: { error: "Unable disable the SimplifyDebt"}, status: :unprocessable_entity
         end 
+    end
+
+    def fetch_bills_of_group
+        expenses = @group.expenses
+        if expenses.present?
+            render json: expenses, status: :ok
+        else
+            render json: {message: "No bills / expenses present in this group"}, status: :unprocessable_entity
+        end
     end
  
  
