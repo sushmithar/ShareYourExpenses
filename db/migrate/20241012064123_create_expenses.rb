@@ -5,7 +5,7 @@ class CreateExpenses < ActiveRecord::Migration[7.1]
       t.string :name
       t.decimal :total_amount
       t.string :category
-      t.boolean :split_equaly
+      t.boolean :split_equally
       t.references :user, null: false, foreign_key: true
 
       t.timestamps

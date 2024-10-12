@@ -5,7 +5,6 @@ class CreateExpenseTransactions < ActiveRecord::Migration[7.1]
       t.references :payer, null: false, foreign_key: { to_table: :users }
       t.references :payee, null: false, foreign_key: { to_table: :users }
       t.decimal :amount_paid, precision: 10, scale: 2, null: false
-      t.datetime :transaction_date, null: false
 
       t.timestamps
     end

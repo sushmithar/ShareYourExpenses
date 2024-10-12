@@ -16,7 +16,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_12_070941) do
     t.bigint "payer_id", null: false
     t.bigint "payee_id", null: false
     t.decimal "amount_paid", precision: 10, scale: 2, null: false
-    t.datetime "transaction_date", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["expense_id"], name: "index_expense_transactions_on_expense_id"
@@ -29,7 +28,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_12_070941) do
     t.string "name"
     t.decimal "total_amount", precision: 10
     t.string "category"
-    t.boolean "split_equaly"
+    t.boolean "split_equally"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

@@ -1,5 +1,5 @@
 class Expense < ApplicationRecord
-  enum group_type: {
+  enum category: {
     entertainment: "Entertainment",
     food_and_drink: "Food & Drink,",
     home: "Home",
@@ -13,7 +13,9 @@ class Expense < ApplicationRecord
   belongs_to :user
   has_many :expense_transactions
 
+  accepts_nested_attributes_for :expense_transactions, allow_destroy: true
+
   validates :name, presence: true, uniqueness: true
   validates :total_amount, presence: true
-  validates :split_equaly, presence: true
+  validates :split_equally, inclusion: { in: [true, false], message: "must be true or false" }
 end
