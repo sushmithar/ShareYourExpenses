@@ -16,6 +16,6 @@ class Expense < ApplicationRecord
   accepts_nested_attributes_for :expense_transactions, allow_destroy: true
 
   validates :name, presence: true, uniqueness: true
-  validates :total_amount, presence: true
+  validates :total_amount, numericality: { greater_than_or_equal_to: 0 }
   validates :split_equally, inclusion: { in: [true, false], message: "must be true or false" }
 end

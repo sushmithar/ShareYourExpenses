@@ -18,6 +18,7 @@ Rails.application.routes.draw do
           post 'enable_simplify_debt'
           post 'disable_simplify_debt'
           get 'fetch_bills_of_group'
+          get 'fetch_debts_of_group'
         end
       end
     end

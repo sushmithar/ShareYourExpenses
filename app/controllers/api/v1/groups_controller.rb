@@ -1,6 +1,6 @@
 class Api::V1::GroupsController < ApplicationController
     before_action :set_group, only: [:add_user, :enable_simplify_debt,
-        :disable_simplify_debt, :fetch_bills_of_group]
+        :disable_simplify_debt, :fetch_debts_of_group]
     def create
         @group = Group.new(groups_params)
         if @group.save
@@ -49,7 +49,15 @@ class Api::V1::GroupsController < ApplicationController
             render json: {message: "No bills / expenses present in this group"}, status: :unprocessable_entity
         end
     end
- 
+
+    def fetch_debts_of_group
+        begin
+            debts = FetchGroupDebtService.new(@group).call
+            render json: debts, status: :ok
+        rescue ActiveRecord::RecordNotFound
+            render json: { error: 'Group not found' }, status: :not_found
+        end
+    end
  
     private
  
