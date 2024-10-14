@@ -4,8 +4,11 @@ class Api::V1::ExpensesController < ApplicationController
         if @expense.save
             transactions_data = transaction_params[:user_ids] || transaction_params[:transactions]
             service = ExpenseTransactionService.new(@expense, transactions_data)
-            service.create_transactions
-            render json: @expense, status: :created
+            if service.create_transactions
+                render json: @expense, status: :created
+              else
+                render json: { errors: service.errors }, status: :unprocessable_entity
+              end
         else
             render json: { errors: @expense.errors.full_messages },
                 status: :unprocessable_entity
