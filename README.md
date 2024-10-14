@@ -12,19 +12,19 @@ Things you may want to cover:
 - Configuration
   Database Configuration(Basic of localhost) - Add below 4 line below require environment as shown.
   
-  development: #environment
-  <<: *default
-  database: REQUIRED_DB_NAME
-  username: REQUIRED_USER_NAME
-  password: REQUIRED_PASSWORD
-  host: localhost
+  - development: #environment
+  - <<: *default
+  - database: REQUIRED_DB_NAME
+  - username: REQUIRED_USER_NAME
+  - password: REQUIRED_PASSWORD
+  - host: localhost
   
 - Database creation
   rails db:create
 
 - How to run the application
-  bundle install  #to install the gems/ update the gems
-  rails db:migrate  #to run the migrations
-  rails s #to start the server
+   - bundle install
+   - rails db:migrate 
+   - rails s  
   
 
