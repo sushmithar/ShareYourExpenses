@@ -1,6 +1,6 @@
 class Api::V1::GroupsController < ApplicationController
     before_action :set_group, only: [:add_user, :enable_simplify_debt,
-        :disable_simplify_debt, :fetch_debts_of_group]
+        :disable_simplify_debt, :fetch_bills_of_group, :fetch_debts_of_group]
     def create
         @group = Group.new(groups_params)
         if @group.save
